@@ -1,0 +1,4 @@
+knp_snappy:
+  pdf:
+    enabled: true
+    binary: C:\ProgramData\wkhtmltopdf\bin\wkhtmltopdf.exe
