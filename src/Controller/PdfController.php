@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,6 +104,17 @@ class PdfController extends AbstractController
         $knpSnappyPdf->setOption('margin-right',0);
         $knpSnappyPdf->setOption('margin-left',0);
         $knpSnappyPdf->setOption('page-size',"A4");
+
+              $em = $this->getDoctrine()->getManager();
+      $user = new Users();
+      $user->setFullname($request->get('name'));
+      $user->setEmail($request->get('mail'));
+      $user->setAdresse("");
+      $user->setMobile($request->get('tel'));
+
+      $em->persist($user);
+      $em->flush();
+
         return new Response(
             $knpSnappyPdf->getOutputFromHtml($html),
             200,
@@ -112,6 +124,7 @@ class PdfController extends AbstractController
             )
         );
     }
+
     /**
      * @Route ("/pdf1",name="pdf1")
      */
@@ -204,6 +217,9 @@ class PdfController extends AbstractController
         $knpSnappyPdf->setOption('javascript-delay',1000);
         $knpSnappyPdf->setOption('allow','.');
         $knpSnappyPdf->setOption('lowquality',false);
+
+
+
         return new Response(
             $knpSnappyPdf->getOutputFromHtml($html),
             200,
@@ -212,6 +228,8 @@ class PdfController extends AbstractController
                 'Content-Disposition' => 'attachment; filename="cv.pdf"'
             )
         );
+
+
     }
     /**
      * @Route ("/cvmaker1", name="cvmaker1")
@@ -233,6 +251,7 @@ class PdfController extends AbstractController
      */
     public function choice()
     {
-        return $this->render('pdf/choice.html.twig');
+      return $this->render('pdf/choice.html.twig');
+
     }
 }
