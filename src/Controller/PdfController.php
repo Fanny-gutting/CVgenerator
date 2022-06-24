@@ -3,6 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Entity\Diplomes;
+use App\Entity\Experiences;
+use App\Entity\Skills;
+use App\Entity\Postes;
+
 use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,14 +110,42 @@ class PdfController extends AbstractController
         $knpSnappyPdf->setOption('margin-left',0);
         $knpSnappyPdf->setOption('page-size',"A4");
 
-              $em = $this->getDoctrine()->getManager();
+      $em = $this->getDoctrine()->getManager();
       $user = new Users();
       $user->setFullname($request->get('name'));
       $user->setEmail($request->get('mail'));
       $user->setAdresse("");
       $user->setMobile($request->get('tel'));
-
       $em->persist($user);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $diplome = new Diplomes();
+      $diplome->setIntitule($request->get('ed1'));
+      $diplome->setNameEcole($request->get('cert1'));
+      $em->persist($diplome);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $experience = new Experiences();
+      $experience->setName($request->get('postexp1'));
+      $experience->setNameEntreprise($request->get('soc1'));
+      $experience->setDescription($request->get('exp1'));
+      // $experience->setAnneeDebut($request->get('dd1'));
+      // $experience->setAnneeFin($request->get('df1'));
+      $em->persist($experience);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $poste = new Postes();
+      $poste->setName($request->get('poste'));
+      $em->persist($poste);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $skill = new Skills();
+      $skill->setName($request->get('tc1'));
+      $em->persist($skill);
       $em->flush();
 
         return new Response(
@@ -218,7 +251,45 @@ class PdfController extends AbstractController
         $knpSnappyPdf->setOption('allow','.');
         $knpSnappyPdf->setOption('lowquality',false);
 
+      $em = $this->getDoctrine()->getManager();
+      $user = new Users();
+      $user->setFullname($request->get('name'));
+      $user->setEmail($request->get('mail'));
+      $user->setAdresse($request->get('home'));
+      $user->setMobile($request->get('tel'));
+      $user->setPicture($request->get('avatar'));
+      $em->persist($user);
+      $em->flush();
 
+      $em = $this->getDoctrine()->getManager();
+      $diplome = new Diplomes();
+      $diplome->setIntitule($request->get('ed1'));
+      $diplome->setNameEcole($request->get('cert1'));
+      $em->persist($diplome);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $experience = new Experiences();
+      $experience->setName($request->get('exp1'));
+      $experience->setNameEntreprise($request->get('soc1'));
+      $experience->setDescription($request->get('exp1'));
+      // $experience->setAnneeDebut($request->get('dd1'));
+      // $experience->setAnneeFin($request->get('df1'));
+      $em->persist($experience);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $poste = new Postes();
+      $poste->setName($request->get('poste'));
+      $em->persist($poste);
+      $em->flush();
+
+      $em = $this->getDoctrine()->getManager();
+      $skill = new Skills();
+      $skill->setName($request->get('s1'));
+      $skill->setMaitrise($request->get('p1'));
+      $em->persist($skill);
+      $em->flush();
 
         return new Response(
             $knpSnappyPdf->getOutputFromHtml($html),

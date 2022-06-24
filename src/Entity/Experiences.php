@@ -83,24 +83,24 @@ class Experiences
         return $this;
     }
 
-    public function getAnneeDebut(): ?\DateTimeInterface
+    public function getAnneeDebut(): ?string
     {
         return $this->anneeDebut;
     }
 
-    public function setAnneeDebut(?\DateTimeInterface $anneeDebut): self
+    public function setAnneeDebut(?string $anneeDebut): self
     {
         $this->anneeDebut = $anneeDebut;
 
         return $this;
     }
 
-    public function getAnneeFin(): ?\DateTimeInterface
+    public function getAnneeFin(): ?string
     {
         return $this->anneeFin;
     }
 
-    public function setAnneeFin(?\DateTimeInterface $anneeFin): self
+    public function setAnneeFin(?string $anneeFin): self
     {
         $this->anneeFin = $anneeFin;
 
