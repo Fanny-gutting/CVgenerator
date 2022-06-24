@@ -2,3 +2,7 @@ knp_snappy:
   pdf:
     enabled: true
     binary: C:\ProgramData\wkhtmltopdf\bin\wkhtmltopdf.exe
+
+twig:
+  globals:
+    pathToWeb: "%kernel.root_dir%/../web"

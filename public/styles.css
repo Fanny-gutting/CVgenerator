@@ -14,8 +14,6 @@ body {
   font-size: 14px;
   line-height: 22px;
   color: #555555;
-
-
 }
 
 .bold {
@@ -38,7 +36,8 @@ body {
 }
 
 .resume .resume_left {
-  width: 340px;
+  width: 350px;
+  height: 101.5rem;
   background: #0bb5f4;
 }
 
